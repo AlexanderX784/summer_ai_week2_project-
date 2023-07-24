@@ -86,17 +86,102 @@ def depthFirstSearch(problem: SearchProblem):
     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    from util import Stack
+    visit = {}
+    visited = set(visit)
+    path = []
+    frontier = util.Stack()
+    start = problem.getStartState()
+    goal_found = False
+    cost = 0
+    frontier.push((start, path, cost)) 
+
+    while goal_found == False:
+        currentstate = start
+        currentstate, path, cost= frontier.pop()
+
+        if problem.isGoalState(start):
+            return start
+        elif problem.isGoalState(currentstate):
+                goal_found == True
+                return path
+        else:
+            visited.add(currentstate)
+
+            for child, move, cost in problem.getSuccessors(currentstate):
+                if child not in visited:
+                    frontier.push((child, path+[move], cost))
+    
+    
 
 def breadthFirstSearch(problem: SearchProblem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    from util import Queue
+    visit = {}
+    visited = set(visit)
+    path = []
+    frontier = util.Queue()
+    start = problem.getStartState()
+    goal_found = False
+    cost = 0
+    frontier.push((start, path, cost))
+
+    while goal_found == False:
+   
+        currentstate = start
+        child = problem.getSuccessors(currentstate)
+        cost = 0
+        currentstate, path, cost = frontier.pop()
+
+
+        if problem.isGoalState(start):
+            return start
+        elif problem.isGoalState(currentstate):
+                goal_found == True
+                return path
+        else:
+            visited.add(currentstate)
+
+            for child, move, cost in problem.getSuccessors(currentstate):
+                if child not in visited:
+                    frontier.push((child, path+[move], cost))
+
+
+                                
 
 def uniformCostSearch(problem: SearchProblem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    from util import PriorityQueue
+    visit = {}
+    visited = set(visit)
+    path = []
+    frontier = util.PriorityQueue()
+    start = problem.getStartState()
+    goal_found = False
+    cost = 0
+    frontier.push((start, path, cost))
+
+    while goal_found == False:
+   
+        currentstate = start
+        child = problem.getSuccessors(currentstate)
+        cost = 0
+        currentstate, path, cost = frontier.pop()
+
+
+        if problem.isGoalState(start):
+            return start
+        elif problem.isGoalState(currentstate):
+                goal_found == True
+                return path
+        else:
+            visited.add(currentstate)
+
+            for child, move, cost in problem.getSuccessors(currentstate):
+                if child not in visited:
+                    frontier.push((child, path+[move], cost))
 
 def nullHeuristic(state, problem=None):
     """
